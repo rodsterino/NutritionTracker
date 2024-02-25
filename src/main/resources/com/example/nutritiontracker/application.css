@@ -1,0 +1,18 @@
+.button {
+    -fx-background-color: #148c42;
+    -fx-background-radius: 30 0 0 30;
+    -fx-text-fill: white; /* Ensures text color is white */
+    -fx-padding: 10 20; /* Adds padding to the button */
+    -fx-font-size: 16px; /* Adjusts font size */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Adds a shadow effect */
+}
+
+.button:hover {
+    -fx-background-color: #306141;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Keeps the shadow effect */
+}
+
+.button:pressed {
+    -fx-background-color: #0d331a;
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Changes to an inner shadow to simulate depth */
+}

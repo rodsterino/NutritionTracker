@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="810.0" prefWidth="1033.0" style="-fx-background-color: #c3dbcb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.RecipeController">
+   <children>
+      <ListView fx:id="recipeListView" layoutX="122.0" layoutY="200.0" prefHeight="526.0" prefWidth="294.0" />
+      <ListView fx:id="ingredientsListView" layoutX="539.0" layoutY="200.0" prefHeight="231.0" prefWidth="423.0" />
+      <ListView fx:id="macroListView" layoutX="539.0" layoutY="495.0" prefHeight="231.0" prefWidth="423.0" />
+      <Button fx:id="searchButton" layoutX="416.0" layoutY="153.0" mnemonicParsing="false" onAction="#onSearchButtonClick" prefHeight="25.0" prefWidth="201.0" text="Button" />
+      <TextField fx:id="searchTextField" layoutX="310.0" layoutY="115.0" prefHeight="25.0" prefWidth="416.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="810.0" prefWidth="1033.0" style="-fx-background-color: #c3dbcb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.RecipeController">
+   <children>
+      <ImageView fitHeight="317.0" fitWidth="333.0" layoutX="376.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/work-in-progress.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
