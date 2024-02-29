@@ -18,7 +18,9 @@ public class NutritionDashboard extends Application {
     @FXML
     BorderPane centerPane = new BorderPane();
     Pane pane;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        Implementation imp = new Implementation();
+        imp.initialize();
         launch(args);
     }
 
@@ -57,4 +59,5 @@ public class NutritionDashboard extends Application {
             e.printStackTrace();
         }
     }
+
 }

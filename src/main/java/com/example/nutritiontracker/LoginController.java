@@ -11,8 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-public class LoginController  {
+public class LoginController {
     @FXML
     private Button loginButton;
 
@@ -30,22 +32,35 @@ public class LoginController  {
     @FXML
     private void setupLoginButtonAction() {
         loginButton.setOnAction(event -> {
-            String username = usernameTextField.getText();
+            String email = usernameTextField.getText();
             String password = passwordField.getText();
-            if (validateCredentials(username, password)) {
-                showAlertDialog(Alert.AlertType.INFORMATION, "Login Successful", "Welcome!");
+            if (validateCredentials(email, password)) {
+                showAlertDialog(Alert.AlertType.INFORMATION, "Login Successful", "Welcome!" );
                 switchToMainPane(); // This line switches to the MainPane.fxml after successful login
             } else {
-                showAlertDialog(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password.");
+                showAlertDialog(Alert.AlertType.ERROR, "Login Failed", "Incorrect email or password.");
             }
         });
     }
 
-    private boolean validateCredentials(String username, String password) {
-        final String validUsername = "proar@farmingdale.edu";
-        final String validPassword = "123456";
-        return validUsername.equals(username) && validPassword.equals(password);
+    private boolean validateCredentials(String email, String password) {
+        try {
+            // Query to find the user with the provided email and password
+            String query = "SELECT * FROM User WHERE Email = ? AND Password = ?";
+            PreparedStatement pst = Implementation.connection.prepareStatement(query);
+            pst.setString(1, email);
+            pst.setString(2, password);
+            ResultSet resultSet = pst.executeQuery();
+
+            // Check if a user was found
+            return resultSet.next();
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception
+            showAlertDialog(Alert.AlertType.ERROR, "Database Error", "Error connecting to the database.");
+            return false; // Incorrect credentials or database error
+        }
     }
+
     private void switchToMainPane() {
         try {
             // Load the main pane
@@ -62,6 +77,7 @@ public class LoginController  {
             e.printStackTrace();
         }
     }
+
     private void showAlertDialog(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -69,5 +85,4 @@ public class LoginController  {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
 }

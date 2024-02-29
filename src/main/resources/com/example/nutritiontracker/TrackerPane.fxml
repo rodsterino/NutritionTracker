@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="810.0" prefWidth="1033.0" style="-fx-background-color: #c3dbcb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.RecipeController">
+<AnchorPane prefHeight="810.0" prefWidth="1033.0" style="-fx-background-color: #c3dbcb;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.TrackerController">
    <children>
-      <ImageView fitHeight="317.0" fitWidth="333.0" layoutX="376.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/work-in-progress.png" />
-         </image>
-      </ImageView>
+      <ListView fx:id="breakfastListView" layoutX="118.0" layoutY="118.0" prefHeight="148.0" prefWidth="797.0" />
+      <Label layoutX="118.0" layoutY="83.0" prefHeight="17.0" prefWidth="224.0" text="Breakfast">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <ListView fx:id="lunchListView" layoutX="118.0" layoutY="375.0" prefHeight="148.0" prefWidth="797.0" />
+      <ListView fx:id="dinnerListView" layoutX="118.0" layoutY="628.0" prefHeight="148.0" prefWidth="797.0" />
+      <Label layoutX="118.0" layoutY="333.0" prefHeight="17.0" prefWidth="224.0" text="Lunch">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="118.0" layoutY="586.0" prefHeight="17.0" prefWidth="224.0" text="Dinner">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
