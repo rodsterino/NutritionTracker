@@ -24,6 +24,9 @@ public class LoginController {
     @FXML
     private TextField usernameTextField;
 
+    // Static variable to hold the current user's ID for global access
+    public static int currentUserId = -1;
+
     @FXML
     private void initialize() {
         setupLoginButtonAction();
@@ -45,34 +48,40 @@ public class LoginController {
 
     private boolean validateCredentials(String email, String password) {
         try {
-            // Query to find the user with the provided email and password
-            String query = "SELECT * FROM User WHERE Email = ? AND Password = ?";
+            // Adjusted to use "ID" as the column name, matching your User table structure
+            String query = "SELECT ID, Email, Password FROM User WHERE Email = ? AND Password = ?";
             PreparedStatement pst = Implementation.connection.prepareStatement(query);
             pst.setString(1, email);
             pst.setString(2, password);
             ResultSet resultSet = pst.executeQuery();
 
-            // Check if a user was found
-            return resultSet.next();
+            if (resultSet.next()) {
+                // Correctly fetches the "ID" field from the result set
+                currentUserId = resultSet.getInt("ID");
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
             showAlertDialog(Alert.AlertType.ERROR, "Database Error", "Error connecting to the database.");
-            return false; // Incorrect credentials or database error
+            return false;
         }
+    }
+
+
+    public static int getCurrentUserId() {
+        return currentUserId;
     }
 
     private void switchToMainPane() {
         try {
-            // Load the main pane
             Parent mainPaneRoot = FXMLLoader.load(getClass().getResource("MainPane.fxml"));
             Scene mainPaneScene = new Scene(mainPaneRoot, 1200, 800); // Adjust size as needed
 
-            // Get the current stage (window) from any control, e.g., the login button
             Stage stage = (Stage) loginButton.getScene().getWindow();
-
-            // Set the scene to the main pane
             stage.setScene(mainPaneScene);
-            stage.setTitle("Main Pane"); // Optionally set a new title
+            stage.setTitle("Main Pane");
         } catch (IOException e) {
             e.printStackTrace();
         }
