@@ -75,4 +75,26 @@
     -fx-border-color: deepskyblue; /* Color for focused state */
     -fx-border-width: 2px; /* Keep the border width consistent */
 }
+.radio-button {
+    -fx-padding: 5px 10px;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);
+}
+
+.radio-button .radio, .radio-button .dot {
+    -fx-fill: #4CAF50;
+}
+
+.radio-button:selected .dot {
+    -fx-background-color: #45a049;
+}
+
+.radio-button:focused > .box {
+    -fx-stroke: #4CAF50; /* Focus color */
+}
+
+.radio-button:hover > .box {
+    -fx-stroke-width: 2;
+    -fx-stroke: #45a049; /* Hover effect */
+}
 

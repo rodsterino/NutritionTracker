@@ -3,18 +3,31 @@ package com.example.nutritiontracker;
 public class FoodMacro {
 
     private String foodItem;
+    private double weight;
 
     private double calories;
     private double protein;
     private double fat;
     private double carbs;
 
-    public FoodMacro(String foodItem, double calories, double protein, double fat, double carbs) {
+
+
+    public FoodMacro(String foodItem,double weight, double calories, double protein, double fat, double carbs) {
+        super();
+        this.weight = weight;
         this.foodItem = foodItem;
         this.calories = calories;
         this.protein = protein;
         this.fat = fat;
         this.carbs = carbs;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public String getFoodItem() {

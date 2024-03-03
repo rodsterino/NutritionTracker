@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="810.0" prefWidth="1033.0" style="-fx-background-color: #c3dbcb;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.TrackerController">
+<AnchorPane prefHeight="810.0" prefWidth="1150.0" style="-fx-background-color: #c3dbcb;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.TrackerController">
    <children>
       <ListView fx:id="breakfastListView" layoutX="118.0" layoutY="118.0" prefHeight="148.0" prefWidth="797.0" />
       <Label layoutX="118.0" layoutY="83.0" prefHeight="17.0" prefWidth="224.0" text="Breakfast">

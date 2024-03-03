@@ -133,8 +133,8 @@ public class FoodDatabaseController {
                         double carbs = nutrients.optDouble("CHOCDF", 0) * weight / 100;
 
                         String nutritionFacts = String.format(
-                                "Nutrition facts: Serving Size (%.2f Gram)\nFood Item: %s\nCalories: %.2f kcal\nCarbs: %.2f g\nProtein: %.2f g\nTotal Fats: %.2f g",
-                                weight, foodLabel, calories, carbs, protein, fat
+                                "Nutrition facts: Serving Size (%.2f Gram)\nFood Item: %s\nCalories: %.2f kcal\nProtein: %.2f g\nFat: %.2f g\nCarbs: %.2f g",
+                                weight, foodLabel, calories, protein, fat, carbs
                         );
 
 
@@ -161,12 +161,13 @@ public class FoodDatabaseController {
     private FoodMacro parseMacroDetails(String details) {
         String[] lines = details.split("\\n");
         String foodItem = lines[1].substring(lines[1].indexOf(":") + 1).trim();
+        double weight = Double.parseDouble(lines[0].substring(lines[0].indexOf("(") + 1, lines[0].indexOf("G")).trim()); // Parsing weight as double
         double calories = Double.parseDouble(lines[2].substring(lines[2].indexOf(":") + 1, lines[2].indexOf("kcal")).trim());
         double protein = Double.parseDouble(lines[3].substring(lines[3].indexOf(":") + 1, lines[3].indexOf("g")).trim());
         double fat = Double.parseDouble(lines[4].substring(lines[4].indexOf(":") + 1, lines[4].indexOf("g")).trim());
         double carbs = Double.parseDouble(lines[5].substring(lines[5].indexOf(":") + 1, lines[5].indexOf("g")).trim());
 
-        return new FoodMacro(foodItem, calories, protein, fat, carbs); // Now including weight in the constructor
+        return new FoodMacro(foodItem, weight, calories, protein, fat, carbs);
     }
 
 
@@ -188,29 +189,22 @@ public class FoodDatabaseController {
 
     private void insertIntoDatabase(int userID, FoodMacro foodMacro) {
         connectDB(); // Ensure the connection is established
-        PreparedStatement preparedStatement = null;
-        try {
-            String sql = "INSERT INTO Tracker (UserID, FoodItem, Calories, Protein, Fat, Carbs) VALUES (?, ?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sql); // Corrected: Removed the duplicated PreparedStatement type declaration
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "INSERT INTO Tracker (UserID, FoodItem, Weight, Calories, Protein, Fat, Carbs) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             preparedStatement.setInt(1, userID);
             preparedStatement.setString(2, foodMacro.getFoodItem());
-            preparedStatement.setDouble(3, foodMacro.getCalories());
-            preparedStatement.setDouble(4, foodMacro.getProtein());
-            preparedStatement.setDouble(5, foodMacro.getFat());
-            preparedStatement.setDouble(6, foodMacro.getCarbs());
+            preparedStatement.setDouble(3, foodMacro.getWeight());
+            preparedStatement.setDouble(4, foodMacro.getCalories());
+            preparedStatement.setDouble(5, foodMacro.getProtein());
+            preparedStatement.setDouble(6, foodMacro.getFat());
+            preparedStatement.setDouble(7, foodMacro.getCarbs());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error executing insert into database");
             e.printStackTrace();
-        } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-            } catch (SQLException e) {
-                System.out.println("Error closing resources");
-                e.printStackTrace();
-            }
         }
     }
+
 
 
 

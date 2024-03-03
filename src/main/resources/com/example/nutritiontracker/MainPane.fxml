@@ -81,7 +81,7 @@
          <top>
             <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="314.0" style="-fx-background-color: #333333;" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="823.0" prefWidth="1051.0" style="-fx-background-color: #c3dbcb;" />
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="823.0" prefWidth="1150.0" style="-fx-background-color: #c3dbcb;" />
                </children></Pane>
          </top>
       </BorderPane>
