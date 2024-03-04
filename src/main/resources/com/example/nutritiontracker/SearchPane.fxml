@@ -28,4 +28,14 @@
       </toggleGroup></RadioButton>
    <RadioButton layoutX="918.0" layoutY="425.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="114.0" text="Dinner" toggleGroup="$tgMealTime" />
    <RadioButton layoutX="918.0" layoutY="505.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="114.0" text="Lunch" toggleGroup="$tgMealTime" />
+   <Label fx:id="confirmationMessageLabel" layoutX="408.0" layoutY="745.0" prefHeight="17.0" prefWidth="223.0">
+      <font>
+         <Font name="System Bold" size="22.0" />
+      </font>
+   </Label>
+   <Label fx:id="confirmationLabel" layoutX="215.0" layoutY="755.0" prefHeight="32.0" prefWidth="628.0">
+      <font>
+         <Font name="System Bold" size="22.0" />
+      </font>
+   </Label>
 </AnchorPane>

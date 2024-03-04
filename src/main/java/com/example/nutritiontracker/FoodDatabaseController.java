@@ -33,7 +33,8 @@ public class FoodDatabaseController {
     private TextArea macronutrientDetailsTextArea;
     @FXML
     private Button addButton;
-
+    @FXML
+    private Label confirmationLabel;
     @FXML
     public void initialize() {
         foodItemList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -198,11 +199,19 @@ public class FoodDatabaseController {
             preparedStatement.setDouble(5, foodMacro.getProtein());
             preparedStatement.setDouble(6, foodMacro.getFat());
             preparedStatement.setDouble(7, foodMacro.getCarbs());
-            preparedStatement.executeUpdate();
+
+            // Execute the update
+            int result = preparedStatement.executeUpdate();
+
+            // Check if the update was successful
+            if (result > 0) {
+                Platform.runLater(() -> confirmationLabel.setText("\u2705 Added food item successfully"));
+            }
         } catch (SQLException e) {
             System.out.println("Error executing insert into database");
             e.printStackTrace();
         }
+
     }
 
 
