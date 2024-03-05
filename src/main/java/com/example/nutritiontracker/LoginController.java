@@ -77,7 +77,7 @@ public class LoginController {
     private void switchToMainPane() {
         try {
             Parent mainPaneRoot = FXMLLoader.load(getClass().getResource("MainPane.fxml"));
-            Scene mainPaneScene = new Scene(mainPaneRoot, 1200, 800); // Adjust size as needed
+            Scene mainPaneScene = new Scene(mainPaneRoot, 1400, 800); // Adjust size as needed
 
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setScene(mainPaneScene);

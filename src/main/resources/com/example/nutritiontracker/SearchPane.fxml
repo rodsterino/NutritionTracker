@@ -22,12 +22,12 @@
    <TextArea fx:id="macronutrientDetailsTextArea" layoutX="436.0" layoutY="298.0" prefHeight="400.0" prefWidth="406.0" stylesheets="@application.css" />
    <TextField fx:id="weightTextField" layoutX="183.0" layoutY="181.0" prefHeight="44.0" prefWidth="143.0" promptText="Weight in Grams" />
    <Button fx:id="addButton" layoutX="1059.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleAddAction" text="Add" />
-   <RadioButton layoutX="918.0" layoutY="347.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="114.0" text="Breakfast">
+   <RadioButton fx:id="radioBreakfast" layoutX="918.0" layoutY="347.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="114.0" text="Breakfast">
       <toggleGroup>
-         <ToggleGroup fx:id="tgMealTime" />
+         <ToggleGroup fx:id="mealToggleGroup" />
       </toggleGroup></RadioButton>
-   <RadioButton layoutX="918.0" layoutY="425.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="114.0" text="Dinner" toggleGroup="$tgMealTime" />
-   <RadioButton layoutX="918.0" layoutY="505.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="114.0" text="Lunch" toggleGroup="$tgMealTime" />
+   <RadioButton fx:id="radioLunch" layoutX="918.0" layoutY="425.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="114.0" text="Lunch" toggleGroup="$mealToggleGroup" />
+   <RadioButton fx:id="radioDinner" layoutX="918.0" layoutY="506.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="114.0" text="Dinner" toggleGroup="$mealToggleGroup" />
    <Label fx:id="confirmationMessageLabel" layoutX="408.0" layoutY="745.0" prefHeight="17.0" prefWidth="223.0">
       <font>
          <Font name="System Bold" size="22.0" />

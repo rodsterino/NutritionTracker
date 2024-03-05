@@ -4,15 +4,14 @@ public class FoodMacro {
 
     private String foodItem;
     private double weight;
-
     private double calories;
     private double protein;
     private double fat;
     private double carbs;
+    private String mealTime;
 
 
-
-    public FoodMacro(String foodItem,double weight, double calories, double protein, double fat, double carbs) {
+    public FoodMacro(String foodItem,double weight, double calories, double protein, double fat, double carbs,String mealTime) {
         super();
         this.weight = weight;
         this.foodItem = foodItem;
@@ -20,6 +19,7 @@ public class FoodMacro {
         this.protein = protein;
         this.fat = fat;
         this.carbs = carbs;
+        this.mealTime = mealTime;
     }
 
     public double getWeight() {
@@ -69,4 +69,19 @@ public class FoodMacro {
     public void setCarbs(double carbs) {
         this.carbs = carbs;
     }
+
+    public String getMealTime() {
+        return mealTime;
+    }
+
+    public void setMealTime(String mealTime) {
+        this.mealTime = mealTime;
+    }
+    @Override
+    public String toString() {
+        return String.format("FoodItem: %s\tWeight: %.2fg\tCalories: %.2f\tProtein: %.2fg\tFat: %.2fg\tCarbs: %.2fg",
+                foodItem, weight, calories, protein, fat, carbs);
+    }
+
+
 }

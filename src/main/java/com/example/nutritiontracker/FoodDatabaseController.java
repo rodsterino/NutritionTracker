@@ -1,8 +1,10 @@
 package com.example.nutritiontracker;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -36,6 +38,17 @@ public class FoodDatabaseController {
     @FXML
     private Label confirmationLabel;
     @FXML
+    private ToggleGroup mealToggleGroup;
+
+    @FXML
+    private RadioButton radioBreakfast;
+
+    @FXML
+    private RadioButton radioDinner;
+
+    @FXML
+    private RadioButton radioLunch;
+    @FXML
     public void initialize() {
         foodItemList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -55,7 +68,9 @@ public class FoodDatabaseController {
     @FXML
     private void handleAddAction() {
         FoodMacro foodMacro = parseMacroDetails(macronutrientDetailsTextArea.getText());
-        // Use the static variable from LoginController to get the current user's ID
+        RadioButton selectedMealButton = (RadioButton) mealToggleGroup.getSelectedToggle();
+        String mealTime = selectedMealButton != null ? selectedMealButton.getText() : null;
+
         int userID = LoginController.currentUserId;
         if (userID > 0) { // Ensures that a user is logged in
             insertIntoDatabase(userID, foodMacro);
@@ -167,10 +182,13 @@ public class FoodDatabaseController {
         double protein = Double.parseDouble(lines[3].substring(lines[3].indexOf(":") + 1, lines[3].indexOf("g")).trim());
         double fat = Double.parseDouble(lines[4].substring(lines[4].indexOf(":") + 1, lines[4].indexOf("g")).trim());
         double carbs = Double.parseDouble(lines[5].substring(lines[5].indexOf(":") + 1, lines[5].indexOf("g")).trim());
-
-        return new FoodMacro(foodItem, weight, calories, protein, fat, carbs);
+        String mealTime = getSelectedMealTime();
+        return new FoodMacro(foodItem, weight, calories, protein, fat, carbs,mealTime);
     }
-
+    private String getSelectedMealTime() {
+        RadioButton selectedRadioButton = (RadioButton) mealToggleGroup.getSelectedToggle();
+        return selectedRadioButton.getText();
+    }
 
     private void connectDB() {
         if (connection == null) {
@@ -191,7 +209,7 @@ public class FoodDatabaseController {
     private void insertIntoDatabase(int userID, FoodMacro foodMacro) {
         connectDB(); // Ensure the connection is established
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO Tracker (UserID, FoodItem, Weight, Calories, Protein, Fat, Carbs) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO Tracker (UserID, FoodItem, Weight, Calories, Protein, Fat, Carbs, MealTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
             preparedStatement.setInt(1, userID);
             preparedStatement.setString(2, foodMacro.getFoodItem());
             preparedStatement.setDouble(3, foodMacro.getWeight());
@@ -199,6 +217,8 @@ public class FoodDatabaseController {
             preparedStatement.setDouble(5, foodMacro.getProtein());
             preparedStatement.setDouble(6, foodMacro.getFat());
             preparedStatement.setDouble(7, foodMacro.getCarbs());
+            preparedStatement.setString(8, foodMacro.getMealTime()); // Add mealTime to the prepared statement
+
 
             // Execute the update
             int result = preparedStatement.executeUpdate();
@@ -206,6 +226,9 @@ public class FoodDatabaseController {
             // Check if the update was successful
             if (result > 0) {
                 Platform.runLater(() -> confirmationLabel.setText("\u2705 Added food item successfully"));
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(event -> confirmationLabel.setText(""));
+                pause.play();
             }
         } catch (SQLException e) {
             System.out.println("Error executing insert into database");
