@@ -26,6 +26,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <DatePicker layoutX="520.0" layoutY="33.0" />
+      <DatePicker fx:id="datePicker" layoutX="520.0" layoutY="33.0" onAction="#onDateChange" />
    </children>
 </AnchorPane>

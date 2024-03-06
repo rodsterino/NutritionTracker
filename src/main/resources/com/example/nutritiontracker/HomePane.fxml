@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.AnchorPane?>
 
 
 <AnchorPane prefHeight="810.0" prefWidth="1150.0" style="-fx-background-color: #c3dbcb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.HomeController">
-
+   <children>
+      <PieChart fx:id="pieChart" layoutX="55.0" layoutY="86.0" prefHeight="489.0" prefWidth="560.0" />
+   </children>
 </AnchorPane>

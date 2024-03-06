@@ -1,5 +1,8 @@
 package com.example.nutritiontracker;
 
+import com.example.nutritiontracker.FoodMacro;
+import com.example.nutritiontracker.Implementation;
+import com.example.nutritiontracker.LoginController;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -13,14 +16,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class FoodDatabaseController {
+public class FoodDatabaseController extends Implementation {
 
 
-    public static Connection connection;
-    Statement statement;
-    ResultSet resultSet;
+
     private final String baseUrl = "https://api.edamam.com/api/food-database/v2/parser";
     private final String appId = "2779cfe2";
     private final String appKey = "66be6e191fb200b10f484134e8be2b23";
@@ -183,33 +187,26 @@ public class FoodDatabaseController {
         double fat = Double.parseDouble(lines[4].substring(lines[4].indexOf(":") + 1, lines[4].indexOf("g")).trim());
         double carbs = Double.parseDouble(lines[5].substring(lines[5].indexOf(":") + 1, lines[5].indexOf("g")).trim());
         String mealTime = getSelectedMealTime();
-        return new FoodMacro(foodItem, weight, calories, protein, fat, carbs,mealTime);
+        String dateAdded = getCurrentDate(); // This method needs to be implemented to get the current date in a format like "yyyy-MM-dd"
+
+        return new FoodMacro(foodItem, weight, calories, protein, fat, carbs, mealTime, dateAdded);
+    }
+
+    private String getCurrentDate() {
+        // Implementation to return the current date in the desired format
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
     private String getSelectedMealTime() {
         RadioButton selectedRadioButton = (RadioButton) mealToggleGroup.getSelectedToggle();
         return selectedRadioButton.getText();
     }
 
-    private void connectDB() {
-        if (connection == null) {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                String msAccDB = "NutritionTracker.accdb";
-                String dbURL = "jdbc:ucanaccess://" + msAccDB;
-                connection = DriverManager.getConnection(dbURL);
-                statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                System.out.println("Database Connected...");
-            } catch (Exception e) {
-                System.out.println("Error connecting to database!");
-                e.printStackTrace();
-            }
-        }
-    }
-
     private void insertIntoDatabase(int userID, FoodMacro foodMacro) {
         connectDB(); // Ensure the connection is established
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO Tracker (UserID, FoodItem, Weight, Calories, Protein, Fat, Carbs, MealTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO Tracker (UserID, FoodItem, Weight, Calories, Protein, Fat, Carbs, MealTime, DateAdded) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)")) {
             preparedStatement.setInt(1, userID);
             preparedStatement.setString(2, foodMacro.getFoodItem());
             preparedStatement.setDouble(3, foodMacro.getWeight());
@@ -218,6 +215,7 @@ public class FoodDatabaseController {
             preparedStatement.setDouble(6, foodMacro.getFat());
             preparedStatement.setDouble(7, foodMacro.getCarbs());
             preparedStatement.setString(8, foodMacro.getMealTime()); // Add mealTime to the prepared statement
+            preparedStatement.setTimestamp(9, new java.sql.Timestamp(System.currentTimeMillis())); // Set current timestamp
 
 
             // Execute the update
