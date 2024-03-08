@@ -37,22 +37,22 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Label fx:id="totalcaloriesLabel" layoutX="194.0" layoutY="656.0" prefHeight="17.0" prefWidth="69.0">
+      <Label fx:id="totalcaloriesLabel" layoutX="194.0" layoutY="656.0" prefHeight="30.0" prefWidth="91.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="totalcarbsLabel" layoutX="430.0" layoutY="657.0" prefHeight="17.0" prefWidth="69.0">
+      <Label fx:id="totalcarbsLabel" layoutX="430.0" layoutY="657.0" prefHeight="30.0" prefWidth="91.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="totalfatLabel" layoutX="406.0" layoutY="736.0" prefHeight="17.0" prefWidth="69.0">
+      <Label fx:id="totalfatLabel" layoutX="406.0" layoutY="736.0" prefHeight="30.0" prefWidth="91.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="totalproteinLabel" layoutX="194.0" layoutY="737.0" prefHeight="17.0" prefWidth="69.0">
+      <Label fx:id="totalproteinLabel" layoutX="194.0" layoutY="737.0" prefHeight="30.0" prefWidth="91.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -65,5 +65,10 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
+      <Text layoutX="552.0" layoutY="372.0" rotate="-90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
