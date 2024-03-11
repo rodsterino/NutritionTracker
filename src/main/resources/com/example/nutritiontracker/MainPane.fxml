@@ -12,7 +12,7 @@
 
 <BorderPane fx:id="root" maxWidth="1150.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.NutritionDashboard">
    <left>
-      <Pane maxHeight="1.7976931348623157E308" maxWidth="227.0" minHeight="550.0" minWidth="200.0" prefHeight="550.0" prefWidth="227.0" style="-fx-background-color: #c3dbcb;" stylesheets="@application.css" BorderPane.alignment="CENTER">
+      <Pane maxHeight="1.7976931348623157E308" maxWidth="227.0" minHeight="550.0" minWidth="200.0" prefHeight="550.0" prefWidth="227.0" style="-fx-background-color: #10302c;" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="homeButton" layoutX="1.0" layoutY="30.0" mnemonicParsing="false" onAction="#changePane" prefHeight="75.0" prefWidth="224.0" text="Home" textFill="WHITE">
                <font>
@@ -49,7 +49,7 @@
             </Button>
             <Button fx:id="trackerButton" layoutX="1.0" layoutY="330.0" mnemonicParsing="false" onAction="#changePane" prefHeight="75.0" prefWidth="224.0" text="Tracker" textFill="WHITE">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <stylesheets>
                   <URL value="@application.css" />
@@ -63,12 +63,12 @@
                   <Image url="@Images/NT_logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="21.0" layoutY="453.0" prefHeight="73.0" prefWidth="206.0" text="Nutrition Tracker">
+            <Label layoutX="21.0" layoutY="453.0" prefHeight="73.0" prefWidth="206.0" style="-fx-text-fill: #fafafa;" text="Nutrition Tracker">
                <font>
                   <Font name="System Bold" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="92.0" layoutY="515.0" text="App">
+            <Label layoutX="92.0" layoutY="515.0" style="-fx-text-fill: #fafafa;" text="App">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>

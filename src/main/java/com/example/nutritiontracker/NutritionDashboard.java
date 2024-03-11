@@ -28,7 +28,7 @@ public class NutritionDashboard extends Application {
     public void start(Stage stage) {
         try {
             root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-            Scene scene = new Scene(root,1100,800);
+            Scene scene = new Scene(root,920,400);
             scene.getStylesheets().add(this.getClass().getResource("application.css").toExternalForm());
             stage.setScene(scene);
             stage.show();

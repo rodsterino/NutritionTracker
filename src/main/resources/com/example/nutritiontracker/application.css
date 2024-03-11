@@ -98,3 +98,85 @@
     -fx-stroke: #45a049; /* Hover effect */
 }
 
+/* General chart background */
+.chart {
+    -fx-background-color: #ffffff;
+}
+
+/* PieChart specifics */
+.pie-chart {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+}
+
+.pie-chart .chart-title {
+    -fx-text-fill: #333333;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.pie-chart .label {
+    -fx-fill: white;
+    -fx-font-size: 12px;
+}
+
+.pie-chart .pie-label-line {
+    -fx-stroke: #666666;
+}
+
+/* BarChart specifics */
+.bar-chart {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+}
+
+.bar-chart .chart-title {
+    -fx-text-fill: #333333;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.bar-chart .axis-label {
+    -fx-text-fill: #666666;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.bar-chart .axis {
+    -fx-tick-label-fill: #666666;
+    -fx-tick-mark-visible: false;
+}
+
+.bar-chart .chart-legend {
+    -fx-background-color: #ffffff, #ffffff;
+    -fx-padding: 10px;
+}
+
+.bar-chart .data .default-color0.chart-bar {
+    -fx-bar-fill: #1f77b4;
+}
+
+.bar-chart .data .default-color1.chart-bar {
+    -fx-bar-fill: #ff7f0e;
+}
+
+.bar-chart .data .default-color2.chart-bar {
+    -fx-bar-fill: #2ca02c;
+}
+
+/* General series colors */
+.default-color0.chart-series-line, .default-color0.chart-line-symbol {
+    -fx-stroke: #1f77b4;
+    -fx-fill: #1f77b4;
+}
+
+.default-color1.chart-series-line, .default-color1.chart-line-symbol {
+    -fx-stroke: #ff7f0e;
+    -fx-fill: #ff7f0e;
+}
+
+.default-color2.chart-series-line, .default-color2.chart-line-symbol {
+    -fx-stroke: #2ca02c;
+    -fx-fill: #2ca02c;
+}
+

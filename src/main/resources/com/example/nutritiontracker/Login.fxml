@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,31 +10,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nutritiontracker.LoginController">
    <left>
-      <AnchorPane prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: Green;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="631.0" prefWidth="585.0" style="-fx-background-color: Green;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="204.0" fitWidth="275.0" layoutX="17.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="583.0" fitWidth="610.0" layoutX="-1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Pictures/" />
+                  <Image url="@Images/Login%20Background.jpg" />
                </image>
             </ImageView>
-            <Text fill="#f8f5f5" fontSmoothingType="LCD" layoutX="23.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutrition Tracking App">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Text>
+            <ImageView fitHeight="326.0" fitWidth="314.0" layoutX="270.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Nutrition_Tracker_Logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="500.0" prefWidth="442.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="631.0" prefWidth="340.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField fx:id="passwordField" layoutX="124.0" layoutY="279.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: Green; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="loginButton" layoutX="161.0" layoutY="339.0" mnemonicParsing="false" onAction="#setupLoginButtonAction" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: Green;" text="Login" />
-            <TextField fx:id="usernameTextField" layoutX="124.0" layoutY="237.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: Green; -fx-border-width: 0px 0px 2px 0px;" />
-            <Hyperlink layoutX="145.0" layoutY="439.0" text="Forgot Password" textFill="#0e860e" />
-            <Text fill="#367914" fontSmoothingType="LCD" layoutX="133.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
+            <PasswordField fx:id="passwordField" layoutX="93.0" layoutY="186.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: Green; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="loginButton" layoutX="121.0" layoutY="288.0" mnemonicParsing="false" onAction="#setupLoginButtonAction" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: Green;" text="Login" />
+            <TextField fx:id="usernameTextField" layoutX="93.0" layoutY="144.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: Green; -fx-border-width: 0px 0px 2px 0px;" />
+            <Text fill="#367914" layoutX="93.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
