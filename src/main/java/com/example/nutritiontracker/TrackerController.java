@@ -61,7 +61,11 @@ public class TrackerController {
             while (rs.next()) {
                 // Extract the DateAdded field from the database
                 Timestamp timestamp = rs.getTimestamp("DateAdded");
-                LocalDate dateAdded = timestamp.toLocalDateTime().toLocalDate();
+                LocalDate dateAdded = null;
+                if (timestamp != null) { // Add this null check
+                    dateAdded = timestamp.toLocalDateTime().toLocalDate();
+                    // The rest of your code
+                }
 
                 // Continue only if the dateAdded matches the selectedDate
                 if (dateAdded.equals(selectedDate)) {
