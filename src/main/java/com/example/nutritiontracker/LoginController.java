@@ -26,6 +26,7 @@ public class LoginController {
 
     // Static variable to hold the current user's ID for global access
     public static int currentUserId = -1;
+    public static String loggedInUserName = "";
 
     @FXML
     private void initialize() {
@@ -38,8 +39,8 @@ public class LoginController {
             String email = usernameTextField.getText();
             String password = passwordField.getText();
             if (validateCredentials(email, password)) {
-                showAlertDialog(Alert.AlertType.INFORMATION, "Login Successful", "Welcome!" );
-                switchToMainPane(); // This line switches to the MainPane.fxml after successful login
+                //showAlertDialog(Alert.AlertType.INFORMATION, "Login Successful", "Welcome!" );
+                switchToMainPane();
             } else {
                 showAlertDialog(Alert.AlertType.ERROR, "Login Failed", "Incorrect email or password.");
             }
@@ -48,16 +49,15 @@ public class LoginController {
 
     private boolean validateCredentials(String email, String password) {
         try {
-            // Adjusted to use "ID" as the column name, matching your User table structure
-            String query = "SELECT ID, Email, Password FROM User WHERE Email = ? AND Password = ?";
+            String query = "SELECT ID, FirstName, Email, Password FROM User WHERE Email = ? AND Password = ?";
             PreparedStatement pst = Implementation.connection.prepareStatement(query);
             pst.setString(1, email);
             pst.setString(2, password);
             ResultSet resultSet = pst.executeQuery();
 
             if (resultSet.next()) {
-                // Correctly fetches the "ID" field from the result set
                 currentUserId = resultSet.getInt("ID");
+                loggedInUserName = resultSet.getString("FirstName");
                 return true;
             } else {
                 return false;
@@ -70,18 +70,22 @@ public class LoginController {
     }
 
 
+
     public static int getCurrentUserId() {
         return currentUserId;
     }
 
     private void switchToMainPane() {
         try {
-            Parent mainPaneRoot = FXMLLoader.load(getClass().getResource("MainPane.fxml"));
-            Scene mainPaneScene = new Scene(mainPaneRoot, 1400, 800); // Adjust size as needed
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/nutritiontracker/MainPane.fxml")); // check the path
+            Parent mainPaneRoot = loader.load();
+            NutritionDashboard controller = loader.getController();
+            controller.setWelcomeMessage(loggedInUserName); // This line is now valid because the method exists in NutritionDashboard
 
+            Scene mainPaneScene = new Scene(mainPaneRoot, 1400, 800);
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setScene(mainPaneScene);
-            stage.setTitle("Main Pane");
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

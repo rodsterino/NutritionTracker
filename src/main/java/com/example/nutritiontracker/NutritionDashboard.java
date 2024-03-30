@@ -36,6 +36,7 @@ public class NutritionDashboard extends Application {
         } catch(Exception e) {
             e.printStackTrace();
         }
+
     }
     @FXML
     private Button homeButton;
@@ -61,6 +62,8 @@ public class NutritionDashboard extends Application {
             e.printStackTrace();
         }
     }
-
+    public void setWelcomeMessage(String userName) {
+        welcomeLabel.setText("Welcome, " + userName + "!");
+    }
 
 }
