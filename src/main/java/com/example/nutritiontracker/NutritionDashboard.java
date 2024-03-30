@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -43,7 +44,8 @@ public class NutritionDashboard extends Application {
     private Button recipeButton;
     @FXML
     private Button searchButton;
-
+    @FXML
+    private Label welcomeLabel;
     @FXML
     private Button trackerButton;
     @FXML
@@ -59,5 +61,6 @@ public class NutritionDashboard extends Application {
             e.printStackTrace();
         }
     }
+
 
 }

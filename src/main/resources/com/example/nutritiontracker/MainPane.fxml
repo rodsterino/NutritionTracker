@@ -79,9 +79,21 @@
    <center>
       <BorderPane fx:id="centerPane" BorderPane.alignment="CENTER">
          <top>
-            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="314.0" style="-fx-background-color: #333333;" BorderPane.alignment="CENTER">
+            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="823.0" prefWidth="1244.0" style="-fx-background-color: #333333;" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="823.0" prefWidth="1150.0" style="-fx-background-color: #c3dbcb;" />
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="823.0" prefWidth="1184.0" style="-fx-background-color: #c3dbcb;">
+                     <children>
+                        <ImageView fitHeight="904.0" fitWidth="1527.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/Main%20background%202.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="welcomeLabel" layoutX="355.0" layoutY="242.0" prefHeight="74.0" prefWidth="492.0" stylesheets="@application.css">
+                           <font>
+                              <Font name="System Bold" size="51.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
                </children></Pane>
          </top>
       </BorderPane>

@@ -30,14 +30,19 @@
    <right>
       <AnchorPane prefHeight="631.0" prefWidth="340.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField fx:id="passwordField" layoutX="93.0" layoutY="186.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: Green; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="loginButton" layoutX="121.0" layoutY="288.0" mnemonicParsing="false" onAction="#setupLoginButtonAction" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: Green;" text="Login" />
-            <TextField fx:id="usernameTextField" layoutX="93.0" layoutY="144.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: Green; -fx-border-width: 0px 0px 2px 0px;" />
-            <Text fill="#367914" layoutX="93.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
+            <PasswordField id="signlbl" fx:id="passwordField" layoutX="55.0" layoutY="236.0" promptText="Password" stylesheets="@signin.css" />
+            <Button id="signinbutton" fx:id="loginButton" layoutX="93.0" layoutY="293.0" mnemonicParsing="false" onAction="#setupLoginButtonAction" prefHeight="39.0" prefWidth="111.0" stylesheets="@signin.css" text="Login" />
+            <TextField id="signlbl" fx:id="usernameTextField" layoutX="55.0" layoutY="194.0" promptText="Username" stylesheets="@signin.css" />
+            <Text fill="#367914" layoutX="104.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
             </Text>
+            <ImageView fitHeight="80.0" fitWidth="98.0" layoutX="109.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/SignIn.gif" />
+               </image>
+            </ImageView>
 
          </children>
       </AnchorPane>
