@@ -31,7 +31,7 @@
       <AnchorPane prefHeight="631.0" prefWidth="340.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <PasswordField id="signlbl" fx:id="passwordField" layoutX="55.0" layoutY="236.0" promptText="Password" stylesheets="@signin.css" />
-            <Button id="signinbutton" fx:id="loginButton" layoutX="93.0" layoutY="293.0" mnemonicParsing="false" onAction="#setupLoginButtonAction" prefHeight="39.0" prefWidth="111.0" stylesheets="@signin.css" text="Login" />
+            <Button id="signinbutton" fx:id="loginButton" layoutX="93.0" layoutY="293.0" mnemonicParsing="false" onAction="#setupLoginButtonAction" prefHeight="39.0" prefWidth="111.0" stylesheets="@signin.css" text="Login" textFill="WHITE" />
             <TextField id="signlbl" fx:id="usernameTextField" layoutX="55.0" layoutY="194.0" promptText="Username" stylesheets="@signin.css" />
             <Text fill="#367914" layoutX="104.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
                <font>
@@ -43,6 +43,7 @@
                   <Image url="@Images/SignIn.gif" />
                </image>
             </ImageView>
+            <Button id="signinbutton" fx:id="signupButton" layoutX="93.0" layoutY="343.0" mnemonicParsing="false" onAction="#onSignupButtonClick" prefHeight="39.0" prefWidth="111.0" stylesheets="@signin.css" text="SignUp" textFill="WHITE" />
 
          </children>
       </AnchorPane>

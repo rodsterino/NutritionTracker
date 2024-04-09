@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 public class LoginController {
     @FXML
     private Button loginButton;
+    @FXML
+    private Button signupButton;
 
     @FXML
     private PasswordField passwordField;
@@ -32,7 +34,23 @@ public class LoginController {
     private void initialize() {
         setupLoginButtonAction();
     }
+    @FXML
+    private void onSignupButtonClick() {
+        try {
+            // Load Signup.fxml
+            Parent signupRoot = FXMLLoader.load(getClass().getResource("Signup.fxml"));
+            Scene signupScene = new Scene(signupRoot);
 
+            // Get the current stage using the loginButton (or signupButton) reference
+            Stage stage = (Stage) signupButton.getScene().getWindow();
+
+            // Set the new scene on the current stage
+            stage.setScene(signupScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception (e.g., show an error dialog)
+        }
+    }
     @FXML
     private void setupLoginButtonAction() {
         loginButton.setOnAction(event -> {
