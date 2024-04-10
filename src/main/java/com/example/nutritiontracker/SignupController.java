@@ -3,10 +3,17 @@ package com.example.nutritiontracker;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,11 +29,13 @@ public class SignupController extends Implementation {
     private TextField passwordField;
     @FXML
     private Button signupButton;
+    @FXML
+    private Button backButton;
 
 
     @FXML
     public void initialize() {
-//        connectDB(); // Don't create this second connection, Connection is already established when application starts
+        // Initialization logic if needed
     }
 
     @FXML
@@ -34,7 +43,6 @@ public class SignupController extends Implementation {
         Task<Boolean> signupTask = new Task<Boolean>() {
             @Override
             protected Boolean call() throws Exception {
-                // Place your signup logic here, this is now running on a background thread.
                 String email = emailField.getText();
                 String firstname = firstnameField.getText();
                 String lastname = lastnameField.getText();
@@ -49,6 +57,7 @@ public class SignupController extends Implementation {
                     Platform.runLater(() -> showAlert("Signup Failed", "Email is already in use."));
                     return false;
                 }
+
                 boolean userCreated = createUser(firstname, lastname, email, password);
                 if (userCreated) {
                     Platform.runLater(() -> {
@@ -60,18 +69,16 @@ public class SignupController extends Implementation {
                 }
                 return userCreated;
             }
+
             @Override
             protected void succeeded() {
                 super.succeeded();
-                // This method is called if the task finished successfully.
-                // Re-enable the signup button here
                 signupButton.setDisable(false);
             }
+
             @Override
             protected void failed() {
                 super.failed();
-                // This method is called if the task failed.
-                // Re-enable the signup button here
                 signupButton.setDisable(false);
             }
         };
@@ -83,21 +90,37 @@ public class SignupController extends Implementation {
         });
 
         Thread thread = new Thread(signupTask);
-        thread.setDaemon(true); // Set the thread as a daemon
+        thread.setDaemon(true);
         thread.start();
     }
 
     private boolean validateInput(String email, String firstname, String lastname, String password) {
-        // Add more validation as necessary
         return !email.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty() && password.length() >= 8;
     }
 
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();
+
+        if ("Signup Successful".equals(title)) {
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) signupButton.getScene().getWindow();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+            alert.showAndWait();
+        }
     }
 
     private void clearForm() {
@@ -106,17 +129,17 @@ public class SignupController extends Implementation {
         lastnameField.clear();
         passwordField.clear();
     }
+
     public boolean isEmailUsed(String email) throws SQLException {
         String query = "SELECT COUNT(*) AS count FROM User WHERE Email = ?";
         PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, email);
-            ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    return resultSet.getInt("count") > 0;
-                }
+        statement.setString(1, email);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("count") > 0;
+        }
         return false;
     }
-
 
     public boolean createUser(String firstname, String lastname, String email, String password) throws SQLException {
         String query = "INSERT INTO User (Firstname, Lastname, Email, Password) VALUES (?, ?, ?, ?)";
@@ -128,6 +151,24 @@ public class SignupController extends Implementation {
 
             int result = statement.executeUpdate();
             return result > 0;
+        }
+    }
+    @FXML
+    private void handleBackAction() {
+        try {
+            // Load the login view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the back button
+            Stage stage = (Stage) backButton.getScene().getWindow();
+
+            // Set the scene to login view
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

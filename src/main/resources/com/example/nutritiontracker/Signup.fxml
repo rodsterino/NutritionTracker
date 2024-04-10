@@ -31,12 +31,12 @@
          <children>
             <Button id="signinbutton" fx:id="signupButton" layoutX="230.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleSignupAction" prefHeight="39.0" prefWidth="111.0" stylesheets="@signin.css" text="SignUp" textFill="#fcfcfc" />
             <TextField id="signlbl" fx:id="firstnameField" layoutX="55.0" layoutY="194.0" prefHeight="29.0" prefWidth="225.0" promptText="Firstname" stylesheets="@signin.css" />
-            <Text fill="#367914" layoutX="163.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account">
+            <Text fill="#367914" layoutX="134.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account">
                <font>
-                  <Font name="System Bold" size="37.0" />
+                  <Font name="System Bold" size="44.0" />
                </font>
             </Text>
-            <ImageView fitHeight="80.0" fitWidth="98.0" layoutX="239.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="97.0" fitWidth="104.0" layoutX="254.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/SignIn.gif" />
                </image>
@@ -44,8 +44,8 @@
             <TextField id="signlbl" fx:id="lastnameField" layoutX="302.0" layoutY="194.0" prefHeight="29.0" prefWidth="223.0" promptText="Lastname" stylesheets="@signin.css" />
             <TextField id="signlbl" fx:id="emailField" layoutX="55.0" layoutY="243.0" prefHeight="29.0" prefWidth="225.0" promptText="Email" stylesheets="@signin.css" />
             <TextField id="signlbl" fx:id="passwordField" layoutX="301.0" layoutY="243.0" prefHeight="29.0" prefWidth="225.0" promptText="Password" stylesheets="@signin.css" />
-            <Button id="signinbutton" fx:id="backButton" layoutX="29.0" layoutY="327.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="52.0" stylesheets="@signin.css" />
-            <ImageView fitHeight="53.0" fitWidth="47.0" layoutX="32.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+            <Button id="signinbutton" fx:id="backButton" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleBackAction" prefHeight="47.0" prefWidth="47.0" stylesheets="@signin.css" />
+            <ImageView disable="true" fitHeight="31.0" fitWidth="27.0" layoutX="24.0" layoutY="353.0" pickOnBounds="true" smooth="false">
                <image>
                   <Image url="@Images/backarrow-removebg-preview.png" />
                </image>
