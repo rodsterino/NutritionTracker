@@ -26,7 +26,7 @@ public class SignupController extends Implementation {
 
     @FXML
     public void initialize() {
-        connectDB();
+//        connectDB(); // Don't create this second connection, Connection is already established when application starts
     }
 
     @FXML
@@ -49,7 +49,6 @@ public class SignupController extends Implementation {
                     Platform.runLater(() -> showAlert("Signup Failed", "Email is already in use."));
                     return false;
                 }
-
                 boolean userCreated = createUser(firstname, lastname, email, password);
                 if (userCreated) {
                     Platform.runLater(() -> {
@@ -60,6 +59,20 @@ public class SignupController extends Implementation {
                     Platform.runLater(() -> showAlert("Signup Failed", "An error occurred. Please try again later."));
                 }
                 return userCreated;
+            }
+            @Override
+            protected void succeeded() {
+                super.succeeded();
+                // This method is called if the task finished successfully.
+                // Re-enable the signup button here
+                signupButton.setDisable(false);
+            }
+            @Override
+            protected void failed() {
+                super.failed();
+                // This method is called if the task failed.
+                // Re-enable the signup button here
+                signupButton.setDisable(false);
             }
         };
 
@@ -95,16 +108,15 @@ public class SignupController extends Implementation {
     }
     public boolean isEmailUsed(String email) throws SQLException {
         String query = "SELECT COUNT(*) AS count FROM User WHERE Email = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, email);
-            try (ResultSet resultSet = statement.executeQuery()) {
+            ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
                     return resultSet.getInt("count") > 0;
                 }
-            }
-        }
         return false;
     }
+
 
     public boolean createUser(String firstname, String lastname, String email, String password) throws SQLException {
         String query = "INSERT INTO User (Firstname, Lastname, Email, Password) VALUES (?, ?, ?, ?)";

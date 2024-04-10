@@ -1,8 +1,5 @@
 package com.example.nutritiontracker;
 
-import com.example.nutritiontracker.FoodMacro;
-import com.example.nutritiontracker.Implementation;
-import com.example.nutritiontracker.LoginController;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
