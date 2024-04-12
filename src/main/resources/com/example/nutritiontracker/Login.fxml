@@ -31,9 +31,9 @@
    <right>
       <AnchorPane prefHeight="631.0" prefWidth="340.0" style="-fx-background-color: white;" stylesheets="@signin.css" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField id="signlbl" fx:id="passwordField" layoutX="68.0" layoutY="204.0" prefHeight="23.0" prefWidth="164.0" promptText="Password" stylesheets="@signin.css" />
+            <PasswordField id="signlbl" fx:id="passwordField" layoutX="51.0" layoutY="204.0" prefHeight="31.0" prefWidth="200.0" promptText="Password" stylesheets="@signin.css" />
             <Button id="signinbutton" fx:id="loginButton" layoutX="102.0" layoutY="254.0" mnemonicParsing="false" onAction="#setupLoginButtonAction" prefHeight="39.0" prefWidth="94.0" stylesheets="@signin.css" text="Login" textFill="WHITE" />
-            <TextField id="signlbl" fx:id="usernameTextField" layoutX="68.0" layoutY="146.0" prefHeight="23.0" prefWidth="164.0" promptText="Username" stylesheets="@signin.css" />
+            <TextField id="signlbl" fx:id="usernameTextField" layoutX="51.0" layoutY="146.0" prefHeight="31.0" prefWidth="200.0" promptText="Username" stylesheets="@signin.css" />
             <Text fill="#367914" layoutX="105.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
                <font>
                   <Font name="System Bold" size="27.0" />
