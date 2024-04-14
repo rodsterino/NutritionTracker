@@ -50,6 +50,8 @@ public class NutritionDashboard extends Application {
     @FXML
     private Button trackerButton;
     @FXML
+    private Button ToolsButton;
+    @FXML
     void changePane(ActionEvent event) {
         String buttonText = "";
         try {

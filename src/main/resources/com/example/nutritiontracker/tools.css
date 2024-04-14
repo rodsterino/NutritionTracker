@@ -1,0 +1,55 @@
+/*Login FXML*/
+
+#toolslbl {
+	-fx-font-family: "Segoe UI";
+	-fx-font-size: 12.0px;
+	-fx-background-radius: 15.0px;
+}
+#toolslbl:hover {
+	    -fx-effect: dropshadow(three-pass-box, rgba(16, 48, 44, 0.5), 8.0, 0.0, 0.0, 0.0);
+
+}
+#signinbutton {
+  -fx-background-color: #148c42;
+  -fx-background-radius: 15.0px;
+  -fx-border-width: 0.0px;
+  -fx-font-size: 15.0px;
+  color: white;
+}
+#signinbutton:hover {
+  -fx-background-color: #306141;
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Keeps the shadow effect */
+}
+
+#signinbutton:pressed {
+  -fx-background-color: #0d331a;
+  -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Changes to an inner shadow to simulate depth */
+}
+.grid-pane {
+    -fx-padding: 10;
+    -fx-hgap: 10; /* Horizontal gap between grid cells */
+    -fx-vgap: 10; /* Vertical gap between grid cells */
+    -fx-border-color: #333;
+    -fx-border-width: 2;
+    -fx-background-color: #f4f4f4;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.grid-pane .label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 5;
+}
+
+.grid-pane .label.title {
+    -fx-font-size: 16px;
+    -fx-underline: true;
+    -fx-text-fill: #2a2a2a;
+}
+
+.grid-pane .label.value {
+    -fx-font-size: 14px;
+    -fx-text-fill: #0000cc;
+}
