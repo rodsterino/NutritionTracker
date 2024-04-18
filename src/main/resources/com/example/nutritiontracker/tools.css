@@ -53,3 +53,24 @@
     -fx-font-size: 14px;
     -fx-text-fill: #0000cc;
 }
+.chart-line-symbol { /* this will style the symbols on the line chart */
+  -fx-background-color: #ff0000, white;
+  -fx-background-insets: 0, 2;
+  -fx-background-radius: 5px;
+  -fx-padding: 5px;
+}
+
+.chart {
+  -fx-font-size: 16px; /* this increases the font size */
+}
+
+.axis-label {
+  -fx-font-weight: bold; /* this makes the label text bold */
+  -fx-text-fill: #333333; /* this changes the color of the label text */
+}
+
+.axis-tick-label {
+  -fx-font-size: 12px; /* increases the font size of the tick labels */
+  -fx-rotation: 45; /* rotates the tick labels, if needed */
+  -fx-text-fill: #333333; /* this changes the color of the tick text */
+}

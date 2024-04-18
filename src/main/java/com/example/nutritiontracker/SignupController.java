@@ -35,7 +35,7 @@ public class SignupController extends Implementation {
 
     @FXML
     public void initialize() {
-        // Initialization logic if needed
+
     }
 
     @FXML

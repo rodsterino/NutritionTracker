@@ -1,19 +1,28 @@
 package com.example.nutritiontracker;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ToolsController {
+    private Connection connection;
 
     @FXML
     private ToggleGroup Gendergroup;
 
     @FXML
     private ComboBox<String> activityComboBox;
-
-    @FXML
-    private TextField ageTextfield;
 
     @FXML
     private Label bmilbl;
@@ -52,13 +61,150 @@ public class ToolsController {
     private GridPane calorieResultsGrid;
     @FXML
     private TextField calorieWeightTextField;
+    @FXML
+    private ComboBox<String> weightRangeComboBox;
+    @FXML
+    private DatePicker weightDatePicker;
+
+    @FXML
+    private TextField poundsTextField;
+    @FXML
+    private Button addWeightButton;
+    @FXML
+    private LineChart<String, Number> weightLineChart;
+
+
 
     @FXML
     private void initialize() {
         searchbmiButton.setOnAction(event -> calculateBMI());
         calculateButton.setOnAction(event -> calculateCalories());
+        connectDB();
+        configureComboBox();
+        loadWeightData("1 Month"); // Default load for 1 month
+        addWeightButton.setOnAction(event -> addWeight());
+        weightRangeComboBox.valueProperty().addListener((obs, oldVal, newVal) -> loadWeightData(newVal));
+    }
+    private void connectDB() {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            String dbURL = "jdbc:ucanaccess://NutritionTracker.accdb"; // Modify this with your actual database path
+            connection = DriverManager.getConnection(dbURL);
+        } catch (Exception e) {
+            System.err.println("Error connecting to the database: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    private void addWeight() {
+        if (weightDatePicker.getValue() != null && !poundsTextField.getText().isEmpty()) {
+            try {
+                double pounds = Double.parseDouble(poundsTextField.getText());
+                // Check if a weight entry for the selected date already exists
+                String checkSql = "SELECT COUNT(*) FROM Weight WHERE ID = ? AND DateAdded = ?";
+                try (PreparedStatement checkStmt = connection.prepareStatement(checkSql)) {
+                    checkStmt.setInt(1, LoginController.currentUserId);
+                    checkStmt.setDate(2, java.sql.Date.valueOf(weightDatePicker.getValue()));
+                    ResultSet rs = checkStmt.executeQuery();
+                    if (rs.next() && rs.getInt(1) == 0) { // No entry for this date exists, so insert new one
+                        String sql = "INSERT INTO Weight (ID, Pounds, DateAdded) VALUES (?, ?, ?)";
+                        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                            pstmt.setInt(1, LoginController.currentUserId);
+                            pstmt.setDouble(2, pounds);
+                            pstmt.setDate(3, java.sql.Date.valueOf(weightDatePicker.getValue()));
+                            pstmt.executeUpdate();
+                            loadWeightData(weightRangeComboBox.getValue()); // Refresh chart
+                        }
+                    } else {
+                        // Provide user feedback about the existing entry
+                    }
+                }
+            } catch (NumberFormatException e) {
+                // Provide user feedback about invalid number format
+            } catch (SQLException e) {
+                // Provide user feedback about database error
+            }
+        }
+    }
+    private void loadWeightData(String range) {
+        weightLineChart.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = getStartDateBasedOnRange(range, endDate);
+
+        List<XYChart.Data<String, Number>> chartData = new ArrayList<>();
+        double minWeight = Double.MAX_VALUE;
+        double maxWeight = -Double.MAX_VALUE;
+
+        String sql = "SELECT Pounds, DateAdded FROM Weight WHERE ID = ? AND DateAdded BETWEEN ? AND ? ORDER BY DateAdded ASC";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, LoginController.currentUserId);
+            pstmt.setDate(2, java.sql.Date.valueOf(startDate));
+            pstmt.setDate(3, java.sql.Date.valueOf(endDate));
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                LocalDate date = rs.getDate("DateAdded").toLocalDate();
+                double weight = rs.getDouble("Pounds");
+                chartData.add(new XYChart.Data<>(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), weight));
+                minWeight = Math.min(minWeight, weight);
+                maxWeight = Math.max(maxWeight, weight);
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading weight data: " + e.getMessage());
+        }
+
+        series.getData().addAll(chartData);
+        weightLineChart.getData().add(series);
+
+        // Update the axis
+        NumberAxis yAxis = (NumberAxis) weightLineChart.getYAxis();
+        yAxis.setAutoRanging(false);
+        yAxis.setLowerBound(Math.max(0, minWeight - 20));
+        yAxis.setUpperBound(maxWeight + 20);
+        yAxis.setTickUnit(5);
+
+        // For the x-axis, let's turn auto-ranging back on to see if that fixes the issue
+        CategoryAxis xAxis = (CategoryAxis) weightLineChart.getXAxis();
+        xAxis.setAutoRanging(true);
+
+        // Request layout update
+        weightLineChart.requestLayout();
     }
 
+    private LocalDate getStartDateBasedOnRange(String range, LocalDate endDate) {
+        switch (range) {
+            case "3 Months":
+                return endDate.minusMonths(3);
+            case "6 Months":
+                return endDate.minusMonths(6);
+            case "12 Months":
+                return endDate.minusMonths(12);
+            default:
+                return endDate.minusMonths(1); // Default to 1 month
+        }
+    }
+
+
+    private void configureComboBox() {
+        weightRangeComboBox.setItems(FXCollections.observableArrayList("1 Month", "3 Months", "6 Months", "12 Months").sorted());
+        weightRangeComboBox.getSelectionModel().selectFirst();
+    }
+    @FXML
+    private void handleDatePickAction() {
+        // Logic to be executed when a date is picked, if any.
+        LocalDate selectedDate = weightDatePicker.getValue();
+        // Do something with the selected date...
+    }
+    @FXML
+    private void handleAddWeightAction() {
+        addWeight(); // This calls your existing method to add weight
+    }
+
+    @FXML
+    private void handleWeightRangeAction() {
+        String selectedRange = weightRangeComboBox.getValue();
+        loadWeightData(selectedRange); // Load the chart data based on the selected range
+    }
     @FXML
     private void calculateBMI() {
         try {

@@ -2,8 +2,12 @@
 
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -27,7 +31,7 @@
             <Image url="@Images/Main_background_2-removebg.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" height="312.0" layoutX="412.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="662.0">
+      <Rectangle arcHeight="20.0" arcWidth="20.0" height="283.0" layoutX="415.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" width="688.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -46,6 +50,24 @@
          </fill>
       </Rectangle>
       <Rectangle arcHeight="20.0" arcWidth="20.0" height="395.0" layoutX="51.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" width="254.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.27485379576683044" green="0.6315789222717285" blue="0.41754385828971863" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" height="401.0" layoutX="401.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" width="704.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -97,31 +119,31 @@
          </image>
       </ImageView>
       <Button fx:id="searchbmiButton" layoutX="182.0" layoutY="220.0" mnemonicParsing="false" onAction="#calculateBMI" prefHeight="36.0" prefWidth="93.0" text="Search" />
-      <TextField id="toolslbl" fx:id="calorieageTextField" alignment="CENTER" layoutX="475.0" layoutY="171.0" prefHeight="30.0" prefWidth="59.0" stylesheets="@tools.css" />
-      <TextField id="toolslbl" fx:id="caloriefeetTextfield" alignment="CENTER" layoutX="502.0" layoutY="223.0" prefHeight="30.0" prefWidth="70.0" promptText="Feet" stylesheets="@tools.css" />
-      <Label layoutX="428.0" layoutY="227.0" text="Height:">
+      <TextField id="toolslbl" fx:id="calorieageTextField" alignment="CENTER" layoutX="481.0" layoutY="127.0" prefHeight="30.0" prefWidth="59.0" stylesheets="@tools.css" />
+      <TextField id="toolslbl" fx:id="caloriefeetTextfield" alignment="CENTER" layoutX="508.0" layoutY="179.0" prefHeight="30.0" prefWidth="70.0" promptText="Feet" stylesheets="@tools.css" />
+      <Label layoutX="434.0" layoutY="183.0" text="Height:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField id="toolslbl" fx:id="calorieinchesTextField" alignment="CENTER" layoutX="590.0" layoutY="223.0" prefHeight="30.0" prefWidth="64.0" promptText="Inches" stylesheets="@tools.css" />
-      <Label layoutX="428.0" layoutY="169.0" prefHeight="30.0" prefWidth="64.0" text="Age: ">
+      <TextField id="toolslbl" fx:id="calorieinchesTextField" alignment="CENTER" layoutX="596.0" layoutY="179.0" prefHeight="30.0" prefWidth="64.0" promptText="Inches" stylesheets="@tools.css" />
+      <Label layoutX="434.0" layoutY="125.0" prefHeight="30.0" prefWidth="64.0" text="Age: ">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <RadioButton fx:id="maleRadio" layoutX="505.0" layoutY="285.0" mnemonicParsing="false" text="Male">
+      <RadioButton fx:id="maleRadio" layoutX="511.0" layoutY="241.0" mnemonicParsing="false" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="Gendergroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="femaleRadio" layoutX="560.0" layoutY="285.0" mnemonicParsing="false" text="Female" toggleGroup="$Gendergroup" />
-      <Label layoutX="425.0" layoutY="279.0" text="Gender:">
+      <RadioButton fx:id="femaleRadio" layoutX="566.0" layoutY="241.0" mnemonicParsing="false" text="Female" toggleGroup="$Gendergroup" />
+      <Label layoutX="431.0" layoutY="235.0" text="Gender:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="activityComboBox" layoutX="505.0" layoutY="330.0" prefHeight="23.0" prefWidth="124.0">
+      <ComboBox fx:id="activityComboBox" layoutX="511.0" layoutY="286.0" prefHeight="23.0" prefWidth="124.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Sedentary" />
@@ -133,18 +155,18 @@
          </items>
       </ComboBox>
 
-      <Label layoutX="426.0" layoutY="325.0" text="Activity:">
+      <Label layoutX="432.0" layoutY="281.0" text="Activity:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="calculateButton" layoutX="462.0" layoutY="380.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Calculate" />
+      <Button fx:id="calculateButton" layoutX="522.0" layoutY="330.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Calculate" />
       <Label layoutX="415.0" layoutY="60.0" text="Calorie Calculator">
          <font>
             <Font size="37.0" />
          </font>
       </Label>
-      <GridPane fx:id="calorieResultsGrid" gridLinesVisible="true" layoutX="754.0" layoutY="169.0" prefHeight="256.0" prefWidth="288.0">
+      <GridPane fx:id="calorieResultsGrid" gridLinesVisible="true" layoutX="746.0" layoutY="130.0" prefHeight="231.0" prefWidth="264.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -156,11 +178,38 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Label layoutX="540.0" layoutY="171.0" text="Weight">
+      <Label layoutX="546.0" layoutY="127.0" text="Weight">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField id="toolslbl" fx:id="calorieWeightTextField" alignment="CENTER" layoutX="610.0" layoutY="173.0" prefHeight="30.0" prefWidth="70.0" stylesheets="@tools.css" />
+      <TextField id="toolslbl" fx:id="calorieWeightTextField" alignment="CENTER" layoutX="616.0" layoutY="129.0" prefHeight="30.0" prefWidth="70.0" stylesheets="@tools.css" />
+      <LineChart fx:id="weightLineChart" layoutX="395.0" layoutY="424.0" prefHeight="401.0" prefWidth="694.0" title="Weight Management">
+        <xAxis>
+          <CategoryAxis side="BOTTOM">
+               <tickLabelFont>
+                  <Font name="System Bold" size="16.0" />
+               </tickLabelFont></CategoryAxis>
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT">
+               <tickLabelFont>
+                  <Font name="System Bold" size="16.0" />
+               </tickLabelFont></NumberAxis>
+        </yAxis>
+      </LineChart>
+      <DatePicker fx:id="weightDatePicker" layoutX="74.0" layoutY="620.0" prefHeight="36.0" prefWidth="222.0" />
+      <TextField fx:id="poundsTextField" layoutX="72.0" layoutY="696.0" prefHeight="25.0" prefWidth="100.0" />
+      <Button fx:id="addWeightButton" layoutX="211.0" layoutY="696.0" mnemonicParsing="false" onAction="#handleAddWeightAction" prefHeight="25.0" prefWidth="77.0" text="Button" />
+      <ComboBox fx:id="weightRangeComboBox" layoutX="656.0" layoutY="395.0" onAction="#handleDatePickAction" prefWidth="150.0">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="1 Month" />
+            <String fx:value="3 Months" />
+            <String fx:value="6 Months" />
+            <String fx:value="12 Months" />
+         </FXCollections>
+      </items>
+      </ComboBox>
    </children>
 </AnchorPane>
