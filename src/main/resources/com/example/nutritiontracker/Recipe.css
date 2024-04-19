@@ -74,4 +74,7 @@
 .text-area:focused {
     -fx-border-color: deepskyblue; /* Color for focused state */
     -fx-border-width: 2px; /* Keep the border width consistent */
+    -fx-background-radius: 15.0px;
+      -fx-border-width: 0.0px;
+      -fx-font-size: 18.0px;
 }

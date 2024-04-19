@@ -74,3 +74,27 @@
   -fx-rotation: 45; /* rotates the tick labels, if needed */
   -fx-text-fill: #333333; /* this changes the color of the tick text */
 }
+#searchButton {
+  -fx-background-color: #148c42;
+  -fx-background-radius: 15.0px;
+  -fx-border-width: 0.0px;
+  -fx-font-size: 18.0px;
+  color: white;
+}
+#searchButton:hover {
+  -fx-background-color: #306141;
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Keeps the shadow effect */
+}
+
+Button:pressed {
+  -fx-background-color: #0d331a;
+  -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Changes to an inner shadow to simulate depth */
+}
+.list-cell {
+    -fx-padding: 10px; /* Space inside each cell */
+    -fx-background-color: transparent; /* Avoid overriding rounded corners */
+    -fx-font-weight: bold; /* Bold text */
+    -fx-font-size: 8px; /* Larger text for better readability */
+    -fx-text-fill: black; /* Color of the text */
+
+}
