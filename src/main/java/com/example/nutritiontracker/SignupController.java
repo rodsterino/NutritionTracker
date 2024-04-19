@@ -7,9 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -32,10 +30,9 @@ public class SignupController extends Implementation {
     @FXML
     private Button backButton;
 
-
     @FXML
     public void initialize() {
-
+        // Initialization logic if needed
     }
 
     @FXML
@@ -50,6 +47,11 @@ public class SignupController extends Implementation {
 
                 if (!validateInput(email, firstname, lastname, password)) {
                     Platform.runLater(() -> showAlert("Validation Error", "Please ensure all fields are filled correctly."));
+                    return false;
+                }
+
+                if (!validatePassword(password)) {
+                    Platform.runLater(() -> showAlert("Validation Error", "Password must be:\n- At least 8 characters long\n- Have at least one number\n- Have at least one uppercase letter."));
                     return false;
                 }
 
@@ -69,58 +71,28 @@ public class SignupController extends Implementation {
                 }
                 return userCreated;
             }
-
-            @Override
-            protected void succeeded() {
-                super.succeeded();
-                signupButton.setDisable(false);
-            }
-
-            @Override
-            protected void failed() {
-                super.failed();
-                signupButton.setDisable(false);
-            }
         };
 
-        signupTask.setOnFailed(e -> {
-            Throwable throwable = signupTask.getException();
-            showAlert("Database Error", "An error occurred with the database. Please contact support.");
-            throwable.printStackTrace();
-        });
-
-        Thread thread = new Thread(signupTask);
-        thread.setDaemon(true);
-        thread.start();
+        new Thread(signupTask).start();
     }
 
     private boolean validateInput(String email, String firstname, String lastname, String password) {
-        return !email.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty() && password.length() >= 8;
+        return !email.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty() && !password.isEmpty();
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(AlertType.INFORMATION);
+    private boolean validatePassword(String password) {
+        boolean lengthCheck = password.length() >= 8;
+        boolean numberCheck = password.matches(".*\\d.*");
+        boolean uppercaseCheck = !password.equals(password.toLowerCase());
+        return lengthCheck && numberCheck && uppercaseCheck;
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(message);
-
-        if ("Signup Successful".equals(title)) {
-            alert.showAndWait().ifPresent(response -> {
-                if (response == ButtonType.OK) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-                        Parent root = loader.load();
-                        Stage stage = (Stage) signupButton.getScene().getWindow();
-                        stage.setScene(new Scene(root));
-                        stage.show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } else {
-            alert.showAndWait();
-        }
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     private void clearForm() {
@@ -148,28 +120,21 @@ public class SignupController extends Implementation {
             statement.setString(2, lastname);
             statement.setString(3, email);
             statement.setString(4, password);
-
             int result = statement.executeUpdate();
             return result > 0;
         }
     }
+
     @FXML
     private void handleBackAction() {
         try {
-            // Load the login view
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
             Parent root = loader.load();
-
-            // Get the current stage from the back button
             Stage stage = (Stage) backButton.getScene().getWindow();
-
-            // Set the scene to login view
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }

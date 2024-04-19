@@ -46,7 +46,10 @@
             <TextField id="signlbl" fx:id="emailField" layoutX="38.0" layoutY="255.0" prefHeight="40.0" prefWidth="230.0" promptText="Email" stylesheets="@signin.css" />
             <TextField id="signlbl" fx:id="passwordField" layoutX="302.0" layoutY="255.0" prefHeight="40.0" prefWidth="230.0" promptText="Password" stylesheets="@signin.css">
                <tooltip>
-                  <Tooltip text="- Password length must be 8 characters long" />
+                  <Tooltip text="Password must contain: 8-20 characters, 1 Uppercase, 1 number">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Tooltip>
                </tooltip>
                <font>
                   <Font name="System Bold" size="12.0" />
