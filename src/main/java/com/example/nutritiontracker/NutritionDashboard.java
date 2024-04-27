@@ -65,8 +65,7 @@ public class NutritionDashboard extends Application {
         }
     }
     public void setWelcomeMessage(String userName) {
-        welcomeLabel.setText("Welcome," + userName + "!\n" +
-                "Eat Well, Live Well");
+        welcomeLabel.setText(STR."Welcome,\{userName}!\nEat Well, Live Well");
 
 
     }
