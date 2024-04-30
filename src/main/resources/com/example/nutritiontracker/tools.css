@@ -79,7 +79,7 @@
   -fx-background-radius: 15.0px;
   -fx-border-width: 0.0px;
   -fx-font-size: 18.0px;
-  color: white;
+  -fx-text-fill: white;
 }
 #searchButton:hover {
   -fx-background-color: #306141;

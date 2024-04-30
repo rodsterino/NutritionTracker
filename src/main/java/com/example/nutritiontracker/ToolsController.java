@@ -84,6 +84,7 @@ public class ToolsController {
         loadWeightData("1 Month"); // Default load for 1 month
         addWeightButton.setOnAction(event -> addWeight());
         weightRangeComboBox.valueProperty().addListener((obs, oldVal, newVal) -> loadWeightData(newVal));
+        weightDatePicker.setValue(LocalDate.now());
     }
     private void connectDB() {
         try {
@@ -145,7 +146,7 @@ public class ToolsController {
             while (rs.next()) {
                 LocalDate date = rs.getDate("DateAdded").toLocalDate();
                 double weight = rs.getDouble("Pounds");
-                chartData.add(new XYChart.Data<>(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), weight));
+                chartData.add(new XYChart.Data<>(date.format(DateTimeFormatter.ofPattern("MM/dd")), weight));
                 minWeight = Math.min(minWeight, weight);
                 maxWeight = Math.max(maxWeight, weight);
             }
