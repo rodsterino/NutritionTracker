@@ -58,17 +58,17 @@
                   <URL value="@application.css" />
                </stylesheets>
             </Button>
-            <ImageView fitHeight="312.0" fitWidth="275.0" layoutX="-24.0" layoutY="567.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="312.0" fitWidth="275.0" layoutX="-23.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/NT_logo.png" />
                </image>
             </ImageView>
-            <Label layoutX="21.0" layoutY="494.0" prefHeight="73.0" prefWidth="206.0" style="-fx-text-fill: #fafafa;" text="Nutrition Tracker">
+            <Label layoutX="26.0" layoutY="426.0" prefHeight="73.0" prefWidth="206.0" style="-fx-text-fill: #fafafa;" text="Nutrition Tracker">
                <font>
                   <Font name="System Bold" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="92.0" layoutY="556.0" style="-fx-text-fill: #fafafa;" text="App">
+            <Label layoutX="97.0" layoutY="488.0" style="-fx-text-fill: #fafafa;" text="App">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -109,6 +109,7 @@
                   <Image url="@Images/icons8-fruits-64.png" />
                </image>
             </ImageView>
+            <Button id="buttonlogout" fx:id="logoutButton" layoutX="67.0" layoutY="740.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="49.0" prefWidth="95.0" stylesheets="@application.css" text="Logout" />
          </children>
       </Pane>
    </left>

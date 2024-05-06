@@ -1,15 +1,18 @@
 package com.example.nutritiontracker;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -52,6 +55,8 @@ public class NutritionDashboard extends Application {
     @FXML
     private Button ToolsButton;
     @FXML
+    private Button logoutButton;
+    @FXML
     void changePane(ActionEvent event) {
         String buttonText = "";
         try {
@@ -69,5 +74,24 @@ public class NutritionDashboard extends Application {
 
 
     }
+    @FXML
+    private void handleLogout() {
+        // Log out logic here (session clear, token invalidation, etc.)
 
+        // Create a pause transition of 1 second
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.5 ));
+        pause.setOnFinished(event -> {
+            try {
+                // Load the login view
+                Node node = (Node) logoutButton;
+                Stage stage = (Stage) node.getScene().getWindow();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Login.fxml")));
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        pause.play();
+    }
 }
